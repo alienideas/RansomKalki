@@ -1,102 +1,85 @@
-# VectorStrike 
-Real-Time Anti-Ransomware with Countering &amp; Disrupting Ransomware . Counter Ransomware, early sage detection ,prevention, countering incidents, removal, disrupting an active attack and establishing digital forensics to detect and find source and actors behind it.
+# VectorStrike
 
-This version adds AI-Driven Deception Technology as a proactive detection and early-warning layer.
-Deception creates a web of realistic traps (canary files, honeytokens, decoy systems, fake shares, fake credentials, fake backup servers, etc.). When an attacker interacts with any of these traps, the system receives a very high-confidence signal that malicious activity is occurring — even if the attacker is using legitimate admin credentials.
-AI-Driven Deception Capabilities
-•	Dynamic & Adaptive Decoys: AI analyzes the real environment and automatically generates believable decoys that match naming conventions, file types, share structures, and privilege levels.
-•	Multiple Deception Types:
-o	Canary / honey files (especially in high-value and backup-related locations)
-o	Honeytokens (fake credentials, API keys, documents)
-o	Decoy file shares and databases
-o	Fake privileged accounts and service accounts
-o	Decoy backup servers and shadow-copy targets
-o	Decoy domain controllers or admin tools (where safe)
-•	Intelligent Placement: AI decides optimal locations and density of decoys based on risk and observed attacker behavior.
-•	High-Fidelity Alerting: Any interaction with a decoy generates a maximum-priority signal.
-•	Automatic Escalation: Deception triggers feed directly into the Impact Mitigation Engine and Digital Forensics.
-•	Learning Loop: Attacker interactions with decoys improve both the deception strategy and the Behavioral Learning models.
-Updated Core Architecture
-Layer	Role
-AI Behavioral Learning & Anomaly Detection	Continuous baselining + anomaly scoring
-AI-Driven Threat Hunting	Proactive discovery
-AI-Driven Deception Technology	High-confidence early detection via traps
-Threat Intelligence Feeds	External + internal intelligence
-Impact Mitigation Engine	Strongest encryption disruption (privilege-agnostic)
-Digital Forensics & Incident Investigation	Evidence preservation & attribution
-Continuous Verification	Session re-evaluation
-Self-Healing Engine	Automated remediation
-Zero Trust + ZTNA + JIT + Micro-Segmentation	Access control
-Pre-Execution Blocking	Code execution prevention
-Key Integration with Impact Mitigation
-Any interaction with a deception asset (especially canary files or fake backup targets) is treated as a confirmed high-severity event and immediately triggers the full Impact Mitigation response:
-•	Process termination
-•	File-system write freeze
-•	Host isolation
-•	Revocation of the account’s sessions (even Superadmin)
-•	Full forensic acquisition
-•	Mandatory explicit admin approval before any further activity is allowed
-Updated High-Level Algorithm Flow
-text
-LOOP forever:
+Real-time anti-ransomware defense platform with AI-driven behavioral detection, deception-based early warning, and autonomous impact mitigation.
 
-  1. AI Behavioral Learning & Anomaly Detection
-  2. AI-Driven Threat Hunting
-  3. AI-Driven Deception Technology
-       - Continuously deploy, refresh, and adapt decoys
-       - Monitor for any interaction
+VectorStrike is designed to detect ransomware earlier, disrupt active attacks faster, and preserve evidence for forensic investigation. It combines:
+- AI behavioral learning and anomaly scoring
+- proactive threat hunting
+- deception technology with high-fidelity canary assets
+- impact mitigation and host isolation
+- continuous verification and self-healing controls
 
-  4. Real-time Evaluation
-       Behavioral score + Hunting insights + Deception triggers + Threat Intel + Policies
+This version adds AI-driven deception as a proactive detection layer. Deception creates a mesh of realistic traps such as canary files, honeytokens, fake credentials, decoy shares, fake backup targets, and simulated privileged assets. Any interaction with a decoy is treated as a high-confidence ransomware signal.
 
-  5. IF Deception trigger OR high-confidence encryption anomaly:
-       → Immediate hand-off to Impact Mitigation Engine
-         (disrupt, isolate, revoke, forensic, require explicit approval)
+## Why this matters
 
-  6. Continuous Verification + Self-Healing
-  7. Feedback into Behavioral models, Hunting hypotheses, and Deception strategy
-Updated Flowchart
+Ransomware typically follows a lifecycle:
+1. Reconnaissance
+2. Initial access
+3. Access establishment
+4. Environment discovery
+5. Privilege escalation and lateral movement
+6. Preparation for impact
+7. Encryption, extortion, and disruption
 
+Traditional defenses often detect too late. VectorStrike focuses on early warning, containment, and disruption before encryption can complete.
 
-Benefits of Adding AI-Driven Deception
-•	Provides extremely high-confidence early detection signals with very low false positives.
-•	Works even when the attacker uses stolen privileged credentials.
-•	Detects attackers during discovery, preparation for impact, and early encryption stages.
-•	Forces attackers to risk revealing themselves if they interact with any decoy.
-•	Continuously adapts decoys using AI so they remain realistic and effective.
-•	Directly fuels the strongest Impact Mitigation response.
-The algorithm now includes a powerful deception layer that acts as an early-warning minefield, significantly increasing the chance of detecting and disrupting ransomware before or at the very start of the impact stage.
+## Core capabilities
 
+- AI Behavioral Learning & Anomaly Detection
+  - Continuous baselining
+  - Dynamic risk scoring
+  - Behavioral drift detection
 
-Version 1.0
-Countering Ransomeware 
-How Ransomware Operates and develop a strategy to early detection ,prevention, countering incidents, removal and disrupting and active attack and establishing digital forensics to detect and find source and actors behind it.
+- AI-Driven Threat Hunting
+  - Proactive investigation
+  - Risk-based search and validation
+  - Attack-path analysis
 
+- AI-Driven Deception Technology
+  - Canary files and honeytokens
+  - Decoy shares, databases, and backups
+  - Fake privileged accounts and service accounts
+  - High-fidelity, adaptive decoy placement
 
-1.	Reconnaissance: Attackers gather information about an organization, its people, technology, suppliers, and public-facing services.
-Countering Detection and prevention: need strategy and inputs and actions to be taken for prevention using system and resources configs, access and controls.
-2.	Initial access: They gain entry through phishing, impersonation, stolen credentials, vulnerable systems, or a compromised supplier.
-   Countering Detection and prevention: need strategy and inputs and actions to be taken for prevention using system and resources configs, access and controls.
+- Impact Mitigation Engine
+  - Process termination
+  - File-system write freeze
+  - Host isolation
+  - Session revocation
+  - Forced admin approval for resumed activity
 
-3.	Access establishment: They try to maintain access and may use legitimate accounts or remote-management tools.
-Countering Detection and prevention: need strategy and inputs and actions to be taken for prevention using system and resources configs, access and controls.
+- Digital Forensics & Incident Investigation
+  - Evidence preservation
+  - Attack attribution support
+  - Timeline reconstruction
 
-4.	Environment discovery: They identify important systems, accounts, shared resources, and backups.
-    Countering Detection and prevention: need strategy and inputs and actions to be taken for prevention using system and resources configs, access and controls.
+- Continuous Verification & Self-Healing
+  - Session re-evaluation
+  - Adaptive remediation
+  - Policy-based recovery
 
-5.	Privilege expansion and lateral movement: They seek broader permissions and access additional systems.
-Countering Detection and prevention: need strategy and inputs and actions to be taken for prevention using system and resources configs, access and controls.
+- Zero Trust + ZTNA + JIT + Micro-Segmentation
+  - Restrictive access controls
+  - Least-privilege enforcement
+  - Reduced lateral movement
 
-6.	Preparation for impact: They may collect sensitive data, interfere with recovery, or prepare to disrupt systems.
-   Countering Detection and prevention: need strategy and inputs and actions to be taken for prevention using system and resources configs ,access and controls.
+- Pre-Execution Blocking
+  - Prevent dangerous execution paths
+  - Reduce exposure before malware reaches its payload stage
 
-7.	Extortion and disruption: They may encrypt or disable systems, threaten to publish stolen data, or both.
-Activation: Once inside, the ransomware is activated, which:
-Encrypts files on the infected system.
-May also exfiltrate sensitive data to threaten public release.
-Ransom Demand: After encryption, victims receive a notification detailing:
-The amount of ransom required, usually in cryptocurrency.
-Instructions on how to pay to regain access to their data
-Countering Detection and prevention: need strategy and inputs and actions to be taken for prevention using system and resources configs ,access and controls.
-Detection and response: The organization investigates, contains affected systems, preserves evidence, and begins recovery.
+## High-level architecture
 
+```text
+AI Behavioral Learning
+        |
+        v
+AI Threat Hunting ----> Deception Layer ----> High-confidence alert
+        |                                      |
+        +------------------> Real-time Evaluation <----+
+                                |
+                                v
+                    Impact Mitigation Engine
+                                |
+                                v
+                  Forensics + Verification + Self-Healing
