@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sniffton Security Dashboard</title>
+<style>
+  :root {
+    --bg: #0f172a; --card: #1e293b; --border: #334155;
+    --text: #e2e8f0; --muted: #94a3b8; --accent: #3b82f6;
+    --green: #22c55e; --red: #ef4444; --yellow: #eab308; --orange: #f97316;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  header { background: linear-gradient(135deg, #1e3a5f, #0f172a); border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+  header h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; }
+  header .badge { font-size: 0.75rem; padding: 3px 10px; border-radius: 999px; font-weight: 600; }
+  .online { background: #14532d; color: var(--green); }
+  .offline { background: #450a0a; color: var(--red); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; padding: 20px 24px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+  .card h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 8px; }
+  .card .value { font-size: 1.75rem; font-weight: 700; }
+  .card .sub { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+  .section { padding: 0 24px 24px; }
+  .section h2 { font-size: 1rem; margin-bottom: 12px; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  th, td { padding: 10px 14px; text-align: left; font-size: 0.85rem; border-bottom: 1px solid var(--border); }
+  th { background: #162032; color: var(--muted); font-weight: 600; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #243044; }
+  .btn { border: none; border-radius: 6px; padding: 5px 12px; font-size: 0.75rem; font-weight: 600; cursor: pointer; margin-right: 6px; }
+  .btn-approve { background: #166534; color: #bbf7d0; }
+  .btn-approve:hover { background: #15803d; }
+  .btn-deny { background: #7f1d1d; color: #fecaca; }
+  .btn-deny:hover { background: #991b1b; }
+  .sev-high { color: var(--red); font-weight: 700; }
+  .sev-medium { color: var(--orange); }
+  .sev-low { color: var(--yellow); }
+  #logbox { background: #0b1220; border: 1px solid var(--border); border-radius: 12px; padding: 14px; font-family: Consolas, monospace; font-size: 0.75rem; max-height: 220px; overflow-y: auto; white-space: pre-wrap; color: #94a3b8; }
+  .footer { text-align: center; padding: 16px; color: var(--muted); font-size: 0.75rem; }
+  .pulse { animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+  .empty { color: var(--muted); padding: 20px; text-align: center; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>🛡 Sniffton Security Dashboard</h1>
+  </div>
+  <div>
+    <span id="engineBadge" class="badge offline">OFFLINE</span>
+    <span id="lastUpdate" style="margin-left:12px;font-size:0.75rem;color:#64748b"></span>
+  </div>
+</header>
+
+<div class="grid" id="metrics">
+  <div class="card"><h3>Engine</h3><div class="value" id="mEngine">—</div><div class="sub" id="mMode">—</div></div>
+  <div class="card"><h3>Memory Used</h3><div class="value" id="mMem">—</div><div class="sub">System RAM</div></div>
+  <div class="card"><h3>Findings</h3><div class="value" id="mFindings">—</div><div class="sub">Current cycle</div></div>
+  <div class="card"><h3>Pending Approvals</h3><div class="value" id="mPending">—</div><div class="sub">Awaiting admin</div></div>
+  <div class="card"><h3>Auto-Approve</h3><div class="value" id="mAuto">—</div><div class="sub">Config</div></div>
+  <div class="card"><h3>Platform</h3><div class="value" id="mPlat" style="font-size:1.2rem">—</div><div class="sub" id="mVer">—</div></div>
+</div>
+
+<div class="grid" id="netMetrics" style="padding-top:0">
+  <div class="card"><h3>Outbound Traffic</h3><div class="value" id="mNetMB">—</div><div class="sub">MB / min</div></div>
+  <div class="card"><h3>External Conns</h3><div class="value" id="mNetConns">—</div><div class="sub">Established</div></div>
+  <div class="card"><h3>Unique Remote IPs</h3><div class="value" id="mNetIPs">—</div><div class="sub">External</div></div>
+  <div class="card"><h3>Traffic Pattern</h3><div class="value" id="mNetPattern" style="font-size:0.95rem;line-height:1.3">—</div><div class="sub" id="mSimMode">—</div></div>
+</div>
+
+<div class="section" id="simBanner" style="display:none;padding-top:0">
+  <div class="card" style="border-color:#7c3aed;background:#1a1030">
+    <h3 style="color:#c4b5fd">LIVE NETWORK SIMULATION</h3>
+    <div class="sub" id="simDetail" style="color:#e9d5ff;margin-top:6px">—</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Pending Approvals</h2>
+  <div id="alertsTable"><div class="empty">No pending approvals</div></div>
+</div>
+
+<div class="section">
+  <h2>Recent Engine Log</h2>
+  <div id="logbox">Loading…</div>
+</div>
+
+<div class="footer">Sniffton © Sniffton · Real-time dashboard · Auto-refresh 3s · Localhost only</div>
+
+<script>
+const API = '';  // same origin
+
+async function fetchJSON(path) {
+  try {
+    const r = await fetch(API + path);
+    if (!r.ok) return null;
+    return await r.json();
+  } catch { return null; }
+}
+
+function sevClass(s) {
+  if (!s) return '';
+  s = s.toLowerCase();
+  if (s === 'high' || s === 'critical') return 'sev-high';
+  if (s === 'medium') return 'sev-medium';
+  return 'sev-low';
+}
+
+async function refresh() {
+  const status = await fetchJSON('/api/status');
+  const alerts = await fetchJSON('/api/alerts') || [];
+  const logs   = await fetchJSON('/api/logs') || { lines: [] };
+
+  const badge = document.getElementById('engineBadge');
+  if (status && status.Engine === 'Running') {
+    badge.textContent = 'ONLINE';
+    badge.className = 'badge online pulse';
+  } else {
+    badge.textContent = 'OFFLINE';
+    badge.className = 'badge offline';
+  }
+
+  document.getElementById('lastUpdate').textContent = 'Updated ' + new Date().toLocaleTimeString();
+
+  if (status) {
+    document.getElementById('mEngine').textContent = status.Engine || '—';
+    document.getElementById('mMode').textContent = 'Mode: ' + (status.Mode || '—');
+    document.getElementById('mMem').textContent = (status.MemoryUsedPct != null ? status.MemoryUsedPct + '%' : '—');
+    document.getElementById('mFindings').textContent = status.FindingsCount != null ? status.FindingsCount : '—';
+    document.getElementById('mPending').textContent = status.PendingAlerts != null ? status.PendingAlerts : alerts.length;
+    document.getElementById('mAuto').textContent = status.AutoApprove === true || status.AutoApprove === 'True' ? 'ON' : 'OFF';
+    document.getElementById('mPlat').textContent = status.Platform || '—';
+    document.getElementById('mVer').textContent = 'v' + (status.Version || '—');
+
+    // Network / simulation metrics
+    const mb = status.NetMBPerMin;
+    document.getElementById('mNetMB').textContent = mb != null ? mb : '—';
+    document.getElementById('mNetMB').style.color = (mb != null && mb >= 300) ? 'var(--red)' : '';
+    document.getElementById('mNetConns').textContent = status.NetExternalConns != null ? status.NetExternalConns : '—';
+    document.getElementById('mNetIPs').textContent = status.NetUniqueIPs != null ? status.NetUniqueIPs : '—';
+    document.getElementById('mNetPattern').textContent = status.SimPattern || status.NetPattern || '—';
+    document.getElementById('mSimMode').textContent = status.SimMode ? ('Sim mode: ' + status.SimMode) : (status.SimActive ? 'Live sample' : '—');
+
+    const banner = document.getElementById('simBanner');
+    if (status.SimActive) {
+      banner.style.display = 'block';
+      const rem = status.SimRemainingSec != null ? status.SimRemainingSec + 's left' : '';
+      const remotes = (status.NetRemotes || []).join(', ');
+      document.getElementById('simDetail').textContent =
+        (status.SimPattern || '') + (remotes ? ' → ' + remotes : '') + (rem ? ' · ' + rem : '');
+    } else {
+      banner.style.display = 'none';
+    }
+  }
+
+  // Alerts table
+  const box = document.getElementById('alertsTable');
+  if (!alerts.length) {
+    box.innerHTML = '<div class="empty">No pending approvals</div>';
+  } else {
+    let html = '<table><thead><tr><th>ID</th><th>Name</th><th>Score</th><th>Severity</th><th>Reasons</th><th>Expires</th><th>Action</th></tr></thead><tbody>';
+    for (const a of alerts) {
+      const f = a.Finding || a.finding || {};
+      const id = a.AlertId || a.alertId || '';
+      const name = f.Name || f.name || '—';
+      const score = f.Score || f.score || '—';
+      const sev = f.Severity || f.severity || '—';
+      const reasons = f.Reasons || f.reasons || '—';
+      const exp = a.ExpiresAt || a.expiresAt || '—';
+      html += `<tr>
+        <td style="font-family:monospace;font-size:0.75rem">${id.substring(0,12)}</td>
+        <td>${name}</td>
+        <td>${score}</td>
+        <td class="${sevClass(sev)}">${sev}</td>
+        <td style="max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${reasons}">${reasons}</td>
+        <td style="font-size:0.75rem">${String(exp).replace('T',' ').substring(0,19)}</td>
+        <td>
+          <button class="btn btn-approve" onclick="act('${id}','approve')">Approve</button>
+          <button class="btn btn-deny" onclick="act('${id}','deny')">Deny</button>
+        </td>
+      </tr>`;
+    }
+    html += '</tbody></table>';
+    box.innerHTML = html;
+  }
+
+  // Logs
+  const logbox = document.getElementById('logbox');
+  if (logs.lines && logs.lines.length) {
+    logbox.textContent = logs.lines.join('\n');
+    logbox.scrollTop = logbox.scrollHeight;
+  }
+}
+
+async function act(id, decision) {
+  try {
+    await fetch(API + '/api/' + decision + '?id=' + encodeURIComponent(id), { method: 'POST' });
+    setTimeout(refresh, 500);
+  } catch (e) {
+    alert('Action failed: ' + e);
+  }
+}
+
+refresh();
+setInterval(refresh, 3000);
+</script>
+</body>
+</html>
