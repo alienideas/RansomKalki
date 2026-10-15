@@ -655,6 +655,3 @@ You are responsible for compliance with local law and organizational policy when
 5. Tune `engine.json` for your risk tolerance.
 6. During an incident: `capture` → escalate to `pcap` → review `alerts` and quarantine.
 
-For algorithm design context (kill-chain mapping, Zero Trust layers, competitive notes), see the companion document:
-
-`Anti_Ransomware_Algorithm_Specification.pdf`
