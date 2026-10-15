@@ -1,13 +1,13 @@
-# VectorStrike
+# RansomKalki
 
 **Anti-Ransomware + System Cleaner Engine**  
-Copyright © VectorStrike · Version 1.4
+Copyright © RansomKalki · Version 1.4
 
 ---
 
 ## Who should use this software?
 
-VectorStrike is built for people and teams who need **practical ransomware defense and system hygiene** without buying a full enterprise EDR stack or installing heavy third-party agents.
+RansomKalki is built for people and teams who need **practical ransomware defense and system hygiene** without buying a full enterprise EDR stack or installing heavy third-party agents.
 
 | Audience | Typical use |
 |----------|-------------|
@@ -59,9 +59,9 @@ VectorStrike is built for people and teams who need **practical ransomware defen
 
 | Platform | Primary implementation | Runtime requirements |
 |----------|------------------------|----------------------|
-| **Windows** 10 / 11 / Server | `Windows/VectorStrike.ps1` | PowerShell 5.1+, Administrator |
-| **Linux** | `Linux/vectorstrike.py` | Python 3.6+ (stdlib only), root recommended for PCAP |
-| **Unix / POSIX** | `Unix/vectorstrike.sh` | POSIX `sh`; lightweight sensor only |
+| **Windows** 10 / 11 / Server | `Windows/RansomKalki.ps1` | PowerShell 5.1+, Administrator |
+| **Linux** | `Linux/ransomkalki.py` | Python 3.6+ (stdlib only), root recommended for PCAP |
+| **Unix / POSIX** | `Unix/ransomkalki.sh` | POSIX `sh`; lightweight sensor only |
 
 **Design rules:**
 
@@ -80,7 +80,7 @@ VectorStrike is built for people and teams who need **practical ransomware defen
                     └────────────┬────────────┘
                                  │
                     ┌────────────▼────────────┐
-                    │     VectorStrike Engine     │
+                    │     RansomKalki Engine     │
                     │  collect → detect →     │
                     │  approve → act → log    │
                     └────────────┬────────────┘
@@ -107,7 +107,7 @@ VectorStrike is built for people and teams who need **practical ransomware defen
 
 ### 3.1 Windows
 
-1. Copy the `VectorStrike` folder to a fixed location, e.g. `C:\ProgramData\VectorStrike` or `C:\Tools\VectorStrike`.
+1. Copy the `RansomKalki` folder to a fixed location, e.g. `C:\ProgramData\RansomKalki` or `C:\Tools\RansomKalki`.
 2. Open **PowerShell as Administrator**.
 3. Allow script execution for this session if needed:
 
@@ -118,29 +118,29 @@ Set-ExecutionPolicy -Scope Process Bypass
 4. Install (creates folders, default config, Scheduled Task, starts engine):
 
 ```powershell
-cd C:\Tools\VectorStrike\Windows
-.\VectorStrike.ps1 install
+cd C:\Tools\RansomKalki\Windows
+.\RansomKalki.ps1 install
 ```
 
 5. Verify:
 
 ```powershell
-.\VectorStrike.ps1 status
-.\VectorStrike.ps1 dashboard
+.\RansomKalki.ps1 status
+.\RansomKalki.ps1 dashboard
 ```
 
 **What `install` does:**
 
 - Creates `Data`, `Logs`, `Data\alerts`, `Data\Quarantine`, `Config`
 - Writes default `Config\engine.json` if missing
-- Registers Scheduled Task **VectorStrikeEngine** (SYSTEM, at startup, restart on failure)
+- Registers Scheduled Task **RansomKalkiEngine** (SYSTEM, at startup, restart on failure)
 - Starts the task immediately when possible
 
 **Uninstall:**
 
 ```powershell
-.\VectorStrike.ps1 uninstall
-.\VectorStrike.ps1 stop
+.\RansomKalki.ps1 uninstall
+.\RansomKalki.ps1 stop
 ```
 
 ### 3.2 Linux
@@ -149,22 +149,22 @@ cd C:\Tools\VectorStrike\Windows
 2. Prefer root for service install and full PCAP:
 
 ```bash
-cd /opt/vectorstrike/Linux   # example path
-sudo python3 vectorstrike.py install
+cd /opt/ransomkalki/Linux   # example path
+sudo python3 ransomkalki.py install
 ```
 
 3. If not root, `install` prints a systemd unit you can install manually:
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl enable --now vectorstrike
+sudo systemctl enable --now ransomkalki
 ```
 
 4. Verify:
 
 ```bash
-python3 vectorstrike.py status
-python3 vectorstrike.py dashboard
+python3 ransomkalki.py status
+python3 ransomkalki.py dashboard
 ```
 
 ### 3.3 Unix (POSIX)
@@ -172,10 +172,10 @@ python3 vectorstrike.py dashboard
 Lightweight sensor only:
 
 ```bash
-cd VectorStrike/Unix
-chmod +x vectorstrike.sh
-./vectorstrike.sh start
-./vectorstrike.sh status
+cd RansomKalki/Unix
+chmod +x ransomkalki.sh
+./ransomkalki.sh start
+./ransomkalki.sh status
 ```
 
 For full features on Unix-like systems, use the **Linux Python** build when `python3` is available.
@@ -237,7 +237,7 @@ Optional local list: `Data/threat_intel.txt` (Windows) or `data/threat_intel.txt
 Format:
 
 ```text
-# VectorStrike Threat Intelligence
+# RansomKalki Threat Intelligence
 [PROCESS_NAMES]
 xmrig
 minerd
@@ -257,33 +257,33 @@ Built-in miner/spyware name lists are always loaded; this file extends them.
 
 ## 5. Command reference
 
-### 5.1 Windows (`VectorStrike.ps1`)
+### 5.1 Windows (`RansomKalki.ps1`)
 
 Run from `Windows\` as Administrator:
 
 | Command | Description |
 |---------|-------------|
-| `.\VectorStrike.ps1 install` | Auto-install folders, config, Scheduled Task, start engine |
-| `.\VectorStrike.ps1 uninstall` | Remove Scheduled Task |
-| `.\VectorStrike.ps1 start` | Run engine in foreground |
-| `.\VectorStrike.ps1 stop` | Stop running engine |
-| `.\VectorStrike.ps1 status` | One-shot status (pm2-style) |
-| `.\VectorStrike.ps1 monit` | Live console status (5s refresh) |
-| `.\VectorStrike.ps1 logs` | Tail engine log |
-| `.\VectorStrike.ps1 scan` | One-shot detect and print findings |
-| `.\VectorStrike.ps1 approve -Id <id>` | Approve pending alert and execute action |
-| `.\VectorStrike.ps1 deny -Id <id>` | Deny pending alert |
-| `.\VectorStrike.ps1 dashboard [-Port 8787]` | Open real-time web dashboard |
-| `.\VectorStrike.ps1 simulate -SimMode mixed -DurationSec 120` | Synthetic traffic for demos |
-| `.\VectorStrike.ps1 capture -DurationSec 120 -SampleSec 5` | Real flow-level capture |
-| `.\VectorStrike.ps1 pcap -DurationSec 60` | Full packet capture (pktmon) |
-| `.\VectorStrike.ps1 capture -Full -DurationSec 60 -Filter "TCP Port 443"` | Full PCAP with filter |
-| `.\VectorStrike.ps1 help` | Help text |
+| `.\RansomKalki.ps1 install` | Auto-install folders, config, Scheduled Task, start engine |
+| `.\RansomKalki.ps1 uninstall` | Remove Scheduled Task |
+| `.\RansomKalki.ps1 start` | Run engine in foreground |
+| `.\RansomKalki.ps1 stop` | Stop running engine |
+| `.\RansomKalki.ps1 status` | One-shot status (pm2-style) |
+| `.\RansomKalki.ps1 monit` | Live console status (5s refresh) |
+| `.\RansomKalki.ps1 logs` | Tail engine log |
+| `.\RansomKalki.ps1 scan` | One-shot detect and print findings |
+| `.\RansomKalki.ps1 approve -Id <id>` | Approve pending alert and execute action |
+| `.\RansomKalki.ps1 deny -Id <id>` | Deny pending alert |
+| `.\RansomKalki.ps1 dashboard [-Port 8787]` | Open real-time web dashboard |
+| `.\RansomKalki.ps1 simulate -SimMode mixed -DurationSec 120` | Synthetic traffic for demos |
+| `.\RansomKalki.ps1 capture -DurationSec 120 -SampleSec 5` | Real flow-level capture |
+| `.\RansomKalki.ps1 pcap -DurationSec 60` | Full packet capture (pktmon) |
+| `.\RansomKalki.ps1 capture -Full -DurationSec 60 -Filter "TCP Port 443"` | Full PCAP with filter |
+| `.\RansomKalki.ps1 help` | Help text |
 
-### 5.2 Linux (`vectorstrike.py`)
+### 5.2 Linux (`ransomkalki.py`)
 
 ```bash
-python3 vectorstrike.py <command> [args]
+python3 ransomkalki.py <command> [args]
 ```
 
 | Command | Description |
@@ -299,14 +299,14 @@ python3 vectorstrike.py <command> [args]
 | `pcap [seconds] [bpf...]` | Full PCAP via tcpdump |
 | `capture full [seconds] [bpf...]` | Same as `pcap` |
 
-### 5.3 Unix (`vectorstrike.sh`)
+### 5.3 Unix (`ransomkalki.sh`)
 
 | Command | Description |
 |---------|-------------|
-| `./vectorstrike.sh start` | Lightweight monitoring loop |
-| `./vectorstrike.sh stop` | Stop |
-| `./vectorstrike.sh status` | Status |
-| `./vectorstrike.sh logs` | Log tail |
+| `./ransomkalki.sh start` | Lightweight monitoring loop |
+| `./ransomkalki.sh stop` | Stop |
+| `./ransomkalki.sh status` | Status |
+| `./ransomkalki.sh logs` | Log tail |
 
 ---
 
@@ -384,14 +384,14 @@ On approve or auto-approve:
 
 ```powershell
 # Windows
-.\VectorStrike.ps1 dashboard
-.\VectorStrike.ps1 dashboard -Port 8790
+.\RansomKalki.ps1 dashboard
+.\RansomKalki.ps1 dashboard -Port 8790
 ```
 
 ```bash
 # Linux
-python3 vectorstrike.py dashboard
-python3 vectorstrike.py dashboard 8790
+python3 ransomkalki.py dashboard
+python3 ransomkalki.py dashboard 8790
 ```
 
 Browser opens at `http://localhost:8787/` (localhost only).
@@ -444,11 +444,11 @@ Same operations exist on the CLI for scripting and SSH-only hosts.
 Measures real throughput and connection tables; feeds the dashboard.
 
 ```powershell
-.\VectorStrike.ps1 capture -DurationSec 120 -SampleSec 5
+.\RansomKalki.ps1 capture -DurationSec 120 -SampleSec 5
 ```
 
 ```bash
-python3 vectorstrike.py capture 120 5
+python3 ransomkalki.py capture 120 5
 ```
 
 **Sources:**
@@ -463,24 +463,24 @@ python3 vectorstrike.py capture 120 5
 **Windows (pktmon):**
 
 ```powershell
-.\VectorStrike.ps1 pcap -DurationSec 60
-.\VectorStrike.ps1 capture -Full -DurationSec 60 -Filter "TCP Port 443"
+.\RansomKalki.ps1 pcap -DurationSec 60
+.\RansomKalki.ps1 capture -Full -DurationSec 60 -Filter "TCP Port 443"
 ```
 
 Requires Windows 10 1809+ or Server 2019+. Output under `Data\captures\`:
 
-- `vectorstrike_YYYYMMDD_HHMMSS.etl`
+- `ransomkalki_YYYYMMDD_HHMMSS.etl`
 - `.pcap` when conversion succeeds
 - `.summary.txt`
 
 **Linux (tcpdump):**
 
 ```bash
-sudo python3 vectorstrike.py pcap 60
-sudo python3 vectorstrike.py pcap 60 port 443
+sudo python3 ransomkalki.py pcap 60
+sudo python3 ransomkalki.py pcap 60 port 443
 ```
 
-Install tcpdump if missing (`sudo apt install tcpdump`). Output: `data/captures/vectorstrike_*.pcap`.
+Install tcpdump if missing (`sudo apt install tcpdump`). Output: `data/captures/ransomkalki_*.pcap`.
 
 Open PCAP files in **Wireshark** for protocol-level analysis.
 
@@ -491,13 +491,13 @@ Open PCAP files in **Wireshark** for protocol-level analysis.
 Synthetic metrics and optional fake alerts — **no real packets sent**.
 
 ```powershell
-.\VectorStrike.ps1 simulate -SimMode exfil -DurationSec 60
-.\VectorStrike.ps1 simulate -SimMode mixed -DurationSec 120
+.\RansomKalki.ps1 simulate -SimMode exfil -DurationSec 60
+.\RansomKalki.ps1 simulate -SimMode mixed -DurationSec 120
 ```
 
 ```bash
-python3 vectorstrike.py simulate exfil 60
-python3 vectorstrike.py simulate mixed 120
+python3 ransomkalki.py simulate exfil 60
+python3 ransomkalki.py simulate mixed 120
 ```
 
 | Mode | Behaviour |
@@ -569,7 +569,7 @@ Retain logs and captures according to your incident-response policy. Quarantine 
 3. **Run flow capture** during suspected incidents; escalate to **full PCAP** when you need payload evidence.
 4. **Use simulation only on lab/demo systems** — it creates intentional alert noise.
 5. **Review quarantine** before permanent deletion; restore false positives carefully.
-6. **Pair with OS backups** (VSS, Timeshift, ZFS snapshots, etc.). VectorStrike complements backups; it does not replace them.
+6. **Pair with OS backups** (VSS, Timeshift, ZFS snapshots, etc.). RansomKalki complements backups; it does not replace them.
 7. **Resource target:** idle footprint should stay modest (tens of MB RAM, near-zero CPU between polls). Raise poll intervals on constrained hosts.
 
 ---
@@ -578,7 +578,7 @@ Retain logs and captures according to your incident-response policy. Quarantine 
 
 | Problem | What to check |
 |---------|----------------|
-| `status` shows STOPPED | Run `start` or `install`; on Windows confirm Scheduled Task **VectorStrikeEngine** |
+| `status` shows STOPPED | Run `start` or `install`; on Windows confirm Scheduled Task **RansomKalkiEngine** |
 | Dashboard OFFLINE | Engine/capture/sim not writing `status.json`; check path permissions |
 | Dashboard port in use | `dashboard -Port 8790` or `dashboard 8790` |
 | PCAP fails on Windows | Need Win 10 1809+ / Server 2019+ and `pktmon`; else flow capture still works |
@@ -591,7 +591,7 @@ Retain logs and captures according to your incident-response policy. Quarantine 
 
 ## 14. License
 
-Copyright © VectorStrike  
+Copyright © RansomKalki  
 All rights reserved.
 
 This software is provided for authorized defensive security use on systems you own or are licensed to protect.  
