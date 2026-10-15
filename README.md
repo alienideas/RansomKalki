@@ -1,4 +1,4 @@
-# Sniffton
+# VectorStrike
 
 **Anti-Ransomware + System Cleaner Engine**  
 Copyright © Sniffton · Version 1.4
