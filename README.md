@@ -29,7 +29,7 @@ VectorStryke is built for people and teams who need **practical ransomware defen
 
 ### What it is not
 
-- Not a replacement for enterprise EDR/XDR (CrowdStrike, SentinelOne, Defender for Endpoint, etc.)
+- Not a replacement for enterprise EDR/XDR.
 - Not a full AV signature engine
 - Not a network TAP or hardware packet broker
 - Full L7 deep packet inspection still depends on OS tools (`pktmon` / `tcpdump`) and offline analysis (e.g. Wireshark)
