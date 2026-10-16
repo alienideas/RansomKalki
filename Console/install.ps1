@@ -1,7 +1,7 @@
 #Requires -RunAsAdministrator
 <#
 .SYNOPSIS
-  Install RansomKalki Central Console on Windows (Scheduled Task)
+  Install VectorStryke Central Console on Windows (Scheduled Task)
 .EXAMPLE
   .\install.ps1 -Port 9000
   .\install.ps1 -Port 9000 -Token "shared-secret"
@@ -24,7 +24,7 @@ if (-not $Python) {
     exit 1
 }
 
-Write-Host "=== RansomKalki Central Console Install (Windows) ===" -ForegroundColor Cyan
+Write-Host "=== VectorStryke Central Console Install (Windows) ===" -ForegroundColor Cyan
 Write-Host "  Root   : $Root"
 Write-Host "  Python : $Python"
 Write-Host "  Bind   : ${HostAddress}:$Port"
@@ -34,12 +34,12 @@ New-Item -ItemType Directory -Path (Join-Path $Root "data") -Force | Out-Null
 
 $envFile = Join-Path $Root "console.env"
 @"
-RANSOMKALKI_CONSOLE_HOST=$HostAddress
-RANSOMKALKI_CONSOLE_PORT=$Port
-RANSOMKALKI_ENROLL_TOKEN=$Token
+VECTORSTRYKE_CONSOLE_HOST=$HostAddress
+VECTORSTRYKE_CONSOLE_PORT=$Port
+VECTORSTRYKE_ENROLL_TOKEN=$Token
 "@ | Set-Content $envFile -Encoding UTF8
 
-$taskName = "RansomKalkiConsole"
+$taskName = "VectorStrykeConsole"
 $arg = "`"$Root\console.py`" --host $HostAddress --port $Port"
 $action = New-ScheduledTaskAction -Execute $Python -Argument $arg -WorkingDirectory $Root
 $trigger = New-ScheduledTaskTrigger -AtStartup
@@ -50,7 +50,7 @@ Unregister-ScheduledTask -TaskName $taskName -Confirm:$false -ErrorAction Silent
 Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Force | Out-Null
 
 if ($Token) {
-    [Environment]::SetEnvironmentVariable("RANSOMKALKI_ENROLL_TOKEN", $Token, "Machine")
+    [Environment]::SetEnvironmentVariable("VECTORSTRYKE_ENROLL_TOKEN", $Token, "Machine")
 }
 
 Start-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
