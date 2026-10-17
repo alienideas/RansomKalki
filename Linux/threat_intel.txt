@@ -1,3 +1,0 @@
-# vectorstryke intel test
-ransom
-encrypt
