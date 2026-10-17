@@ -1,0 +1,8 @@
+{
+  "paths": [
+    "/home/workdir/artifacts/VectorStryke/Linux/data/canaries/VS_CANARY_IMPORTANT.txt",
+    "/home/workdir/artifacts/VectorStryke/Linux/data/canaries/documents/VS_CANARY_DOC.txt",
+    "/home/workdir/artifacts/VectorStryke/Linux/data/canaries/finance/VS_CANARY_FIN.txt"
+  ],
+  "InitializedAt": "2026-10-16T17:36:11.931563Z"
+}

@@ -1,0 +1,3 @@
+VectorStryke canary file — do not modify.
+Created=2026-10-16T17:34:04.748000Z
+If this file is encrypted or renamed, ImpactPending may trigger.

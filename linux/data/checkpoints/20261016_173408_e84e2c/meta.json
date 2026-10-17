@@ -1,0 +1,16 @@
+{
+  "CheckpointId": "20261016_173408_e84e2c",
+  "Reason": "manual-cli",
+  "CreatedAt": "2026-10-16T17:34:12.359697Z",
+  "CopiedCanaries": [
+    "VS_CANARY_DOC.txt.sha256",
+    "VS_CANARY_FIN.txt.sha256",
+    "VS_CANARY_IMPORTANT.txt",
+    "VS_CANARY_IMPORTANT.txt.sha256",
+    "manifest.json",
+    "documents/VS_CANARY_DOC.txt",
+    "finance/VS_CANARY_FIN.txt"
+  ],
+  "Notes": [],
+  "Host": "hds-q90wz07z91xt"
+}
