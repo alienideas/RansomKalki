@@ -1,0 +1,23 @@
+{
+  "AgentId": "lin-9f8e7d6c5b4a",
+  "TenantId": "demo",
+  "Hostname": "app-linux-01",
+  "Platform": "Linux",
+  "Version": "1.5.0",
+  "EnrolledAt": "2026-10-15T16:58:58Z",
+  "LastSeen": "2026-10-15T16:58:58Z",
+  "Online": true,
+  "Status": {
+    "Engine": "Running",
+    "Mode": "Idle",
+    "FindingsCount": 0,
+    "PendingAlerts": 0,
+    "HasIssue": false,
+    "Issues": [],
+    "Config": {
+      "AutoApproveEnabled": true,
+      "AutoApproveRemovals": true,
+      "AgentEnabled": true
+    }
+  }
+}
