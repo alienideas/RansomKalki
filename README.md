@@ -287,4 +287,4 @@ Agents work **without** console (fail-soft).
 
 ---
 
-© Sniffton Technologies · VectorStryke
+©VectorStryke
