@@ -1,0 +1,64 @@
+[2026-10-16 17:34:13] [WARNING] Checkpoint created 20261016_173408_e84e2c (7 files)
+[2026-10-16 17:34:15] [INFO] LKG saved at /home/workdir/artifacts/VectorStryke/Linux/data/last_known_good/20261016_173413
+[2026-10-16 17:34:23] [WARNING] Rolled back config from LKG /home/workdir/artifacts/VectorStryke/Linux/data/last_known_good/20261016_173413
+[2026-10-16 17:36:06] [INFO] LKG saved at /home/workdir/artifacts/VectorStryke/Linux/data/last_known_good/20261016_173604
+[2026-10-16 17:36:08] [INFO] LKG saved at /home/workdir/artifacts/VectorStryke/Linux/data/last_known_good/20261016_173607
+[2026-10-16 17:36:17] [WARNING] Checkpoint created 20261016_173613_db58f7 (7 files)
+[2026-10-16 17:36:17] [WARNING] ImpactPending ON — checkpoint=20261016_173613_db58f7 reasons=CanaryIntegrityFailed:1
+[2026-10-17 06:50:40] [INFO] OS-SEC pre-scan class=Present
+[2026-10-17 06:50:42] [WARNING] OS scan quarantined score=40 /tmp/_shell_body_Wt3ANM
+[2026-10-17 06:50:43] [WARNING] OS scan quarantined score=40 /tmp/grok-4c9e1ee0-415d-456e-9c00-dbc3962d8ff1-stdout
+[2026-10-17 06:50:44] [WARNING] OS scan quarantined score=40 /tmp/grok-4c9e1ee0-415d-456e-9c00-dbc3962d8ff1-stderr
+[2026-10-17 06:50:45] [WARNING] OS scan quarantined score=40 /tmp/grok-28b62b22-8b40-4204-9dfe-cc9055ea2275-env
+[2026-10-17 06:50:46] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/0014c7b4
+[2026-10-17 06:50:46] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/00279342
+[2026-10-17 06:50:47] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/010ca46c
+[2026-10-17 06:50:48] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/01b7386d
+[2026-10-17 06:50:49] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/022c8d76
+[2026-10-17 06:50:50] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/02ccd9ce
+[2026-10-17 06:50:51] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/03f36f82
+[2026-10-17 06:50:52] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/04085c5d
+[2026-10-17 06:50:53] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/046957ae
+[2026-10-17 06:50:54] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/04d9d011
+[2026-10-17 06:50:55] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/052b4f98
+[2026-10-17 06:50:55] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/057f0d84
+[2026-10-17 06:50:56] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/059f2378
+[2026-10-17 06:50:57] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/05fec450
+[2026-10-17 06:50:58] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/06f773c7
+[2026-10-17 06:50:59] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/07c2456e
+[2026-10-17 06:51:01] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/084167c6
+[2026-10-17 06:51:02] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/091ce0e2
+[2026-10-17 06:51:03] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/09275b59
+[2026-10-17 06:51:04] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/094e6b9e
+[2026-10-17 06:51:42] [INFO] OS-SEC pre-scan class=Present
+[2026-10-17 06:51:43] [WARNING] OS scan quarantined score=40 /tmp/grok-df6b8346-89d7-413c-9e42-bcb4202ef4a5-stderr
+[2026-10-17 06:51:43] [WARNING] OS scan quarantined score=40 /tmp/grok-df6b8346-89d7-413c-9e42-bcb4202ef4a5-stdout
+[2026-10-17 06:51:44] [WARNING] OS scan quarantined score=40 /tmp/_shell_body_z3TJyX
+[2026-10-17 06:51:45] [WARNING] OS scan quarantined score=40 /tmp/grok-28b62b22-8b40-4204-9dfe-cc9055ea2275-env
+[2026-10-17 06:51:46] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/09800fe0
+[2026-10-17 06:51:47] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/09dde953
+[2026-10-17 06:51:48] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/0a1fa128
+[2026-10-17 06:51:49] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/0a70f056
+[2026-10-17 06:51:49] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/0b2855c5
+[2026-10-17 06:51:51] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/0c5232a3
+[2026-10-17 06:51:52] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/0d04415e
+[2026-10-17 06:51:53] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/0d9f97b3
+[2026-10-17 06:51:54] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/0f063766
+[2026-10-17 06:51:55] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/0f0a7988
+[2026-10-17 06:51:56] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/0f0c8433
+[2026-10-17 06:51:56] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/0f68cbe2
+[2026-10-17 06:51:57] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/0fd0b3f1
+[2026-10-17 06:51:58] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/0fdd5abd
+[2026-10-17 06:51:59] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/0fef87ad
+[2026-10-17 06:52:00] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/10123dee
+[2026-10-17 06:52:01] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/102ef5fd
+[2026-10-17 06:52:02] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/10d84fd3
+[2026-10-17 06:52:03] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/1148d269
+[2026-10-17 06:52:03] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/116cae05
+[2026-10-17 06:52:04] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/1172e634
+[2026-10-17 06:52:05] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/11cb2a80
+[2026-10-17 06:52:06] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/11e1e7e1
+[2026-10-17 06:52:07] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/11f1577f
+[2026-10-17 06:52:08] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/12940077
+[2026-10-17 06:52:09] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/12d6085e
+[2026-10-17 06:52:10] [WARNING] OS scan quarantined score=40 /tmp/node-compile-cache/v24.15.0-x64-cf738c9d-0/13bd6df4
