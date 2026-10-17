@@ -1,0 +1,5 @@
+# path prefixes to skip
+/proc
+/sys
+/dev
+/run

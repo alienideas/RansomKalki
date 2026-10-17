@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "files": 200,
+  "path": "/home/workdir/artifacts/VectorStryke/Linux/data/osscan_baseline.csv"
+}
+{'ok': True, 'files': 20, 'path': '/home/workdir/artifacts/VectorStryke/Linux/data/osscan_baseline.csv'}
+[2026-10-17 06:51:42] [INFO] OS-SEC pre-scan class=Present
+[2026-10-17 06:51:43] [WARNING] OS scan quarantined score=40 /tmp/grok-df6b8346-89d7-413c-9e42-bcb4202ef4a5-stderr

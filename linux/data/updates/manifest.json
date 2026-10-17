@@ -1,0 +1,10 @@
+{
+  "Version": "1.6.1",
+  "Channel": "stable",
+  "Files": [
+    {
+      "path": "threat_intel.txt",
+      "sha256": "0c344be5a1b088e25f375700cc0afae6becf7f8e13df6f8550ec5cc2beaa4639"
+    }
+  ]
+}

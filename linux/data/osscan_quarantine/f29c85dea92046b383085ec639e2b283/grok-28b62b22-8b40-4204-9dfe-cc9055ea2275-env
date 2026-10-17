@@ -1,0 +1,35 @@
+{ [ -r "$HOME/.bashrc" ] && . "$HOME/.bashrc"; } > /dev/null 2>&1
+unalias find 2>/dev/null || true
+find() {
+  if [[ -n $ZSH_VERSION ]]; then
+    /usr/local/bin/bfs "$@"
+  elif (( BASH_SUBSHELL > 0 )); then
+    exec -a find /usr/local/bin/bfs "$@"
+  else
+    (exec -a find /usr/local/bin/bfs "$@")
+  fi
+}
+unalias grep 2>/dev/null || true
+grep() {
+  if [[ -n $ZSH_VERSION ]]; then
+    /usr/local/bin/ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl "$@"
+  elif (( BASH_SUBSHELL > 0 )); then
+    exec -a grep /usr/local/bin/ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl "$@"
+  else
+    (exec -a grep /usr/local/bin/ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl "$@")
+  fi
+}
+if [ -n "$GROK_COMPUTER_STDOUT_FILE" ]; then
+  if [ "$GROK_COMPUTER_STDOUT_FILE" = "$GROK_COMPUTER_STDERR_FILE" ]; then
+    exec >| "$GROK_COMPUTER_STDOUT_FILE" 2>&1
+  else
+    exec >| "$GROK_COMPUTER_STDOUT_FILE" 2>| "$GROK_COMPUTER_STDERR_FILE"
+  fi
+  unset GROK_COMPUTER_STDOUT_FILE GROK_COMPUTER_STDERR_FILE
+fi
+if [ -n "$GROK_COMPUTER_USER_BASH_ENV" ]; then
+  BASH_ENV="$GROK_COMPUTER_USER_BASH_ENV"
+  unset GROK_COMPUTER_USER_BASH_ENV
+else
+  unset BASH_ENV
+fi
