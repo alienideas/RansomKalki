@@ -1,0 +1,7 @@
+[2026-10-16 17:34:13] [WARNING] Checkpoint created 20261016_173408_e84e2c (7 files)
+[2026-10-16 17:34:15] [INFO] LKG saved at /home/workdir/artifacts/VectorStryke/Linux/data/last_known_good/20261016_173413
+[2026-10-16 17:34:23] [WARNING] Rolled back config from LKG /home/workdir/artifacts/VectorStryke/Linux/data/last_known_good/20261016_173413
+[2026-10-16 17:36:06] [INFO] LKG saved at /home/workdir/artifacts/VectorStryke/Linux/data/last_known_good/20261016_173604
+[2026-10-16 17:36:08] [INFO] LKG saved at /home/workdir/artifacts/VectorStryke/Linux/data/last_known_good/20261016_173607
+[2026-10-16 17:36:17] [WARNING] Checkpoint created 20261016_173613_db58f7 (7 files)
+[2026-10-16 17:36:17] [WARNING] ImpactPending ON — checkpoint=20261016_173613_db58f7 reasons=CanaryIntegrityFailed:1
